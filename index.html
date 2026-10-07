@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bean & Bloom — premium coffee store with specialty blends, subscriptions, and a refined shopping experience."
+    />
+    <title>Bean & Bloom | Premium Coffee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="container nav-wrap">
+          <div class="brand-block">
+            <div class="brand-mark">B</div>
+            <div>
+              <div class="brand-name">Bean & Bloom</div>
+              <div class="brand-tag">estate roastery</div>
+            </div>
+          </div>
+
+          <nav class="main-nav" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#story">Story</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <div class="nav-actions">
+            <button class="icon-button" type="button" aria-label="Search">⌕</button>
+            <button class="icon-button cart-button" type="button" aria-label="Open cart">
+              🛒
+              <span class="cart-count" id="cartCount">0</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" id="home">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <span class="eyebrow">single origin • fresh roast</span>
+              <h1>Better coffee for a slower, brighter morning.</h1>
+              <p>
+                Crafted from ethically sourced beans and roasted in small batches for the
+                most expressive cup — rich, balanced, and undeniably memorable.
+              </p>
+
+              <div class="cta-row">
+                <button class="btn btn-primary" type="button" data-scroll="#shop">Shop coffee</button>
+                <button class="btn btn-secondary" type="button" data-scroll="#story">Our story</button>
+              </div>
+
+              <ul class="hero-metrics" aria-label="Store metrics">
+                <li>
+                  <strong>12k+</strong>
+                  <span>happy brews</span>
+                </li>
+                <li>
+                  <strong>48h</strong>
+                  <span>fresh roast delivery</span>
+                </li>
+                <li>
+                  <strong>4.9/5</strong>
+                  <span>customer rating</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="hero-visual" aria-label="Featured coffee">
+              <div class="hero-card hero-card-main">
+                <img
+                  src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80"
+                  alt="Freshly brewed coffee"
+                />
+              </div>
+
+              <div class="hero-card hero-card-floating">
+                <span class="card-badge">best seller</span>
+                <div class="card-title-row">
+                  <h3>Sunrise Blend</h3>
+                  <span>$18</span>
+                </div>
+                <p>citrus • caramel • floral</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-strip">
+          <div class="container feature-grid">
+            <div class="feature-item">
+              <span class="feature-icon">☕</span>
+              <div>
+                <h3>Small-batch roasted</h3>
+                <p>Roasted weekly to preserve aroma and freshness.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🌍</span>
+              <div>
+                <h3>Direct trade</h3>
+                <p>Transparent sourcing from responsible farms.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🚚</span>
+              <div>
+                <h3>Fast delivery</h3>
+                <p>Free shipping on orders above $50.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="catalog" id="shop">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <span class="eyebrow">shop the collection</span>
+                <h2>Curated coffee for every ritual.</h2>
+              </div>
+              <div class="search-box">
+                <input id="searchInput" type="search" placeholder="Search beans, origin, roast..." />
+              </div>
+            </div>
+
+            <div class="filters" aria-label="Coffee filters">
+              <button class="filter-btn active" type="button" data-filter="all">All</button>
+              <button class="filter-btn" type="button" data-filter="light">Light</button>
+              <button class="filter-btn" type="button" data-filter="medium">Medium</button>
+              <button class="filter-btn" type="button" data-filter="dark">Dark</button>
+              <button class="filter-btn" type="button" data-filter="espresso">Espresso</button>
+            </div>
+
+            <div id="productGrid" class="product-grid" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="story" id="story">
+          <div class="container story-grid">
+            <div class="story-image-panel">
+              <img
+                src="https://images.unsplash.com/photo-1447933601403-0c6688bcb4f5?auto=format&fit=crop&w=1200&q=80"
+                alt="Coffee professionals roasting beans"
+              />
+            </div>
+            <div class="story-copy">
+              <span class="eyebrow">our philosophy</span>
+              <h2>From farm to cup, with precision and care.</h2>
+              <p>
+                Every roast at Bean & Bloom begins with thoughtful sourcing, careful evaluation,
+                and exact roast profiles that highlight the bean’s character. We believe coffee
+                should taste honest, vibrant, and unforgettable.
+              </p>
+              <ul class="story-list">
+                <li>Ethically sourced from trusted producers</li>
+                <li>Roasted in low-volume batches for consistency</li>
+                <li>Designed for home brewers and café rituals</li>
+              </ul>
+              <button class="btn btn-primary" type="button">Meet the roastery</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="testimonials" id="reviews">
+          <div class="container">
+            <div class="section-head centered">
+              <span class="eyebrow">customer love</span>
+              <h2>People keep coming back for the taste.</h2>
+            </div>
+
+            <div class="testimonial-grid">
+              <article class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>
+                  “The aroma is incredible and the taste is so clean. It feels like a premium café
+                  experience at home.”
+                </p>
+                <div class="author">— Sara M.</div>
+              </article>
+              <article class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>
+                  “Their espresso mix is silky and rich without being bitter. Best coffee I’ve ordered online.”
+                </p>
+                <div class="author">— Daniel P.</div>
+              </article>
+              <article class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>
+                  “Fresh, elegant, and beautifully packaged. Totally worth it for special mornings.”
+                </p>
+                <div class="author">— Priya N.</div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="cart-panel" id="cartPanel" aria-label="Shopping cart">
+        <div class="cart-header">
+          <div>
+            <span class="eyebrow">your bag</span>
+            <h3>Cart</h3>
+          </div>
+          <button class="close-cart" type="button" aria-label="Close cart">✕</button>
+        </div>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <div class="cart-footer">
+          <div class="totals">
+            <span>Subtotal</span>
+            <strong id="subtotalValue">$0.00</strong>
+          </div>
+          <div class="totals">
+            <span>Shipping</span>
+            <strong>Free</strong>
+          </div>
+          <div class="totals total-row">
+            <span>Total</span>
+            <strong id="totalValue">$0.00</strong>
+          </div>
+          <button class="btn btn-primary checkout-btn" type="button">Checkout</button>
+        </div>
+      </aside>
+
+      <div class="modal-backdrop" id="checkoutModal" aria-hidden="true">
+        <div class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+          <button class="modal-close" type="button" aria-label="Close checkout">✕</button>
+          <div class="modal-head">
+            <span class="eyebrow">complete order</span>
+            <h3 id="checkoutTitle">Checkout</h3>
+          </div>
+
+          <form id="checkoutForm">
+            <div class="field-grid">
+              <label>
+                First name
+                <input type="text" name="firstName" required placeholder="Your name" />
+              </label>
+              <label>
+                Last name
+                <input type="text" name="lastName" required placeholder="Your last name" />
+              </label>
+            </div>
+
+            <label>
+              Email
+              <input type="email" name="email" required placeholder="you@example.com" />
+            </label>
+
+            <label>
+              Address
+              <input type="text" name="address" required placeholder="Street address" />
+            </label>
+
+            <div class="field-grid">
+              <label>
+                City
+                <input type="text" name="city" required placeholder="City" />
+              </label>
+              <label>
+                Postal code
+                <input type="text" name="zip" required placeholder="ZIP" />
+              </label>
+            </div>
+
+            <label>
+              Payment method
+              <select name="payment" required>
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Crypto">Crypto</option>
+              </select>
+            </label>
+
+            <button class="btn btn-primary modal-submit" type="submit">Place order</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="site-footer" id="contact">
+        <div class="container footer-grid">
+          <div>
+            <div class="brand-block footer-brand">
+              <div class="brand-mark">B</div>
+              <div>
+                <div class="brand-name">Bean & Bloom</div>
+                <div class="brand-tag">roastery</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4>Visit</h4>
+            <p>24 Willow St, Portland</p>
+            <p>hello@beanandbloom.com</p>
+          </div>
+
+          <div>
+            <h4>Hours</h4>
+            <p>Mon–Fri: 8am–6pm</p>
+            <p>Sat–Sun: 9am–5pm</p>
+          </div>
+
+          <div>
+            <h4>Newsletter</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email" />
+              <button type="submit">Join</button>
+            </form>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
