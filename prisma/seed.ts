@@ -1,148 +1,125 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
+import bcryptjs from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-const products = [
-  {
-    slug: "ethiopian-yirgacheffe",
-    name: "Ethiopian Yirgacheffe",
-    category: "Single Origin",
-    roast: "Light",
-    origin: "Ethiopia",
-    notes: "Floral · Citrus · Berry",
-    description:
-      "A bright and elegant coffee with floral aroma, sparkling citrus notes, and a delicate berry finish.",
-    price: 18.5,
-    image:
-      "https://images.unsplash.com/photo-1497636577773-f1231844b336?auto=format&fit=crop&w=900&q=80",
-    inventory: 20,
-    isFeatured: true,
-  },
-  {
-    slug: "house-blend",
-    name: "Velvet House Blend",
-    category: "Signature",
-    roast: "Medium",
-    origin: "Colombia · Brazil",
-    notes: "Caramel · Cocoa · Hazelnut",
-    description:
-      "Balanced and velvet-smooth, crafted for your daily ritual with a rich caramel body and warm cocoa finish.",
-    price: 16.9,
-    image:
-      "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80",
-    inventory: 28,
-    isFeatured: true,
-  },
-  {
-    slug: "dark-roast-espresso",
-    name: "Midnight Espresso",
-    category: "Espresso",
-    roast: "Dark",
-    origin: "Brazil · Sumatra",
-    notes: "Chocolate · Smoke · Walnut",
-    description:
-      "A bold espresso profile with a creamy body and smoky sweetness, ideal for lattes and cappuccinos.",
-    price: 19.4,
-    image:
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
-    inventory: 16,
-    isFeatured: true,
-  },
-  {
-    slug: "guatemala-antigua",
-    name: "Guatemala Antigua",
-    category: "Single Origin",
-    roast: "Medium",
-    origin: "Guatemala",
-    notes: "Red Apple · Toffee · Cocoa",
-    description:
-      "Crisp and layered with fruit sweetness and a buttery chocolate finish, perfect for slow mornings.",
-    price: 17.8,
-    image:
-      "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80",
-    inventory: 18,
-    isFeatured: false,
-  },
-  {
-    slug: "cold-brew-boost",
-    name: "Cold Brew Boost",
-    category: "Cold Brew",
-    roast: "Dark",
-    origin: "Brazil",
-    notes: "Molasses · Vanilla · Cocoa",
-    description:
-      "Smooth and naturally sweet with a velvety finish and a longer, rich aftertaste ideal for iced coffee lovers.",
-    price: 15.4,
-    image:
-      "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80",
-    inventory: 24,
-    isFeatured: false,
-  },
-  {
-    slug: "honey-processed-kenya",
-    name: "Honey Process Kenya",
-    category: "Seasonal",
-    roast: "Light",
-    origin: "Kenya",
-    notes: "Grapefruit · Honey · Peach",
-    description:
-      "A luminous cup with honey sweetness, citrus sparkle, and a juicy peach finish that stays vibrant and elegant.",
-    price: 20.1,
-    image:
-      "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=900&q=80",
-    inventory: 12,
-    isFeatured: true,
-  },
-  {
-    slug: "mocca-espresso-mix",
-    name: "Mocca Espresso Mix",
-    category: "Blend",
-    roast: "Medium",
-    origin: "Brazil · Colombia",
-    notes: "Brown Sugar · Almond · Orange",
-    description:
-      "Silky crema, balanced sweetness, and a bright orange lift that creates a luxurious café-style espresso.",
-    price: 18.1,
-    image:
-      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=900&q=80",
-    inventory: 22,
-    isFeatured: false,
-  },
-  {
-    slug: "morning-french-roast",
-    name: "Morning French Roast",
-    category: "Classic",
-    roast: "Dark",
-    origin: "Peru · Honduras",
-    notes: "Cocoa · Biscuit · Toasted Almond",
-    description:
-      "Rich and deeply satisfying, constructed for those who want a full-bodied aromatic cup from the first sip.",
-    price: 17.2,
-    image:
-      "https://images.unsplash.com/photo-1459755486867-b55449bb39ff?auto=format&fit=crop&w=900&q=80",
-    inventory: 21,
-    isFeatured: false,
-  },
-];
-
 async function main() {
+  // Clear existing data
+  await prisma.review.deleteMany();
+  await prisma.wishlist.deleteMany();
+  await prisma.orderItem.deleteMany();
+  await prisma.order.deleteMany();
+  await prisma.product.deleteMany();
+  await prisma.user.deleteMany();
+
+  // Create admin user
+  const adminPassword = await bcryptjs.hash('admin123', 10);
+  await prisma.user.create({
+    data: {
+      email: 'admin@beanboom.com',
+      password: adminPassword,
+      firstName: 'Admin',
+      lastName: 'User',
+      role: 'ADMIN'
+    }
+  });
+
+  // Create products
+  const products = [
+    {
+      name: 'Ethiopian Yirgacheffe',
+      description: 'Bright and floral with fruity undertones. Light-roasted for maximum complexity.',
+      price: 18.99,
+      category: 'Single Origin',
+      roast: 'Light',
+      origin: 'Ethiopia',
+      image: 'https://images.unsplash.com/photo-1497636577773-f1231844b336?auto=format&fit=crop&w=800&q=80',
+      published: true
+    },
+    {
+      name: 'Brazilian Santos',
+      description: 'Smooth, chocolatey with nutty finish. Perfect for espresso and milk drinks.',
+      price: 16.99,
+      category: 'Single Origin',
+      roast: 'Medium',
+      origin: 'Brazil',
+      image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80',
+      published: true
+    },
+    {
+      name: 'Colombian Geisha',
+      description: 'Premium single origin with complex flavor profile. Award-winning coffee.',
+      price: 24.99,
+      category: 'Premium',
+      roast: 'Medium',
+      origin: 'Colombia',
+      image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80',
+      published: true
+    },
+    {
+      name: 'Kenyan AA',
+      description: 'Vibrant acidity with berry and citrus notes. Highly sought after.',
+      price: 19.99,
+      category: 'Single Origin',
+      roast: 'Light',
+      origin: 'Kenya',
+      image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80',
+      published: true
+    },
+    {
+      name: 'Dark Roast Espresso Blend',
+      description: 'Bold and full-bodied with deep caramel and cocoa notes.',
+      price: 15.99,
+      category: 'Blend',
+      roast: 'Dark',
+      origin: 'Multi-Origin',
+      image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80',
+      published: true
+    },
+    {
+      name: 'Indonesian Sumatra',
+      description: 'Earthy with herbal notes and low acidity. Unique processing method.',
+      price: 17.99,
+      category: 'Single Origin',
+      roast: 'Dark',
+      origin: 'Indonesia',
+      image: 'https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=800&q=80',
+      published: true
+    },
+    {
+      name: 'Costa Rican Tarrazú',
+      description: 'Balanced with chocolate and spice undertones. High altitude grown.',
+      price: 18.99,
+      category: 'Single Origin',
+      roast: 'Medium',
+      origin: 'Costa Rica',
+      image: 'https://images.unsplash.com/photo-1447933601403-0c6688bcb4f5?auto=format&fit=crop&w=800&q=80',
+      published: true
+    },
+    {
+      name: 'Guatemalan Huehuetenango',
+      description: 'Smoky with hints of apple and citrus. Mountain grown excellence.',
+      price: 19.99,
+      category: 'Single Origin',
+      roast: 'Light',
+      origin: 'Guatemala',
+      image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b8e5?auto=format&fit=crop&w=800&q=80',
+      published: true
+    }
+  ];
+
   for (const product of products) {
-    await prisma.product.upsert({
-      where: { slug: product.slug },
-      update: product,
-      create: product,
-    });
+    await prisma.product.create({ data: product });
   }
 
-  console.log("Seeded coffee catalog successfully.");
+  console.log('✅ Database seeded successfully');
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (error) => {
-    console.error("Seed error:", error);
-    await prisma.$disconnect();
+  .catch((e) => {
+    console.error(e);
     process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });
